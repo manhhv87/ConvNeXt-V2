@@ -1,7 +1,5 @@
 # Installation
 
-We provide installation instructions for ImageNet classification experiments here.
-
 ## Dependency Setup
 
 ### Create singularity image
