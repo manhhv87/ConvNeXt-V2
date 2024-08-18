@@ -105,3 +105,10 @@ Download the [Beans Imagery Dataset](https://zenodo.org/records/8286126) classif
     healthy/
     rust/
 ```
+
+Unzip dataset and copy anthra, healthy, rust directories to train
+
+Run file:
+```
+python3 split_dataset.py
+```
