@@ -1,0 +1,6 @@
+[submodule "MinkowskiEngine"]
+	path = MinkowskiEngine
+	url = https://github.com/NVIDIA/MinkowskiEngine.git
+[submodule "apex"]
+	path = apex
+	url = https://github.com/NVIDIA/apex
