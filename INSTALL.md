@@ -15,10 +15,10 @@ singularity build --sandbox pytorch-1.13.1-cuda11.6-cudnn8-py3.10-ubuntu20.04 do
 ```
 mkdir -p ~/pytorch
 cd pytorch
-git clone https://github.com/manhhv87/ConvNeXt-V2.git
-cd ConvNeXt-V2
-rm -rf MinkowskiEngine
-git clone https://github.com/NVIDIA/MinkowskiEngine.git
+git clone https://github.com/manhhv87/ConvNeXt-V2.git --recursive
+#cd ConvNeXt-V2
+#rm -rf MinkowskiEngine
+#git clone https://github.com/NVIDIA/MinkowskiEngine.git
 ```
 
 ### Install MinkowskiEngine
