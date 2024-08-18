@@ -58,8 +58,8 @@ sbatch submit.sh
 
 ### Install apex
 ```
-cd ConvNeXt-V2
-git clone https://github.com/NVIDIA/apex
+#cd ConvNeXt-V2
+#git clone https://github.com/NVIDIA/apex
 cd apex
 ```
 
