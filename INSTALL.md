@@ -93,13 +93,24 @@ Download the [Beans Imagery Dataset](https://zenodo.org/records/8286126) classif
 ```
 /path/to/dataset/
   train/
-    class1/
+    anthra/
       img1.jpeg
-    class2/
+    healthy/
       img2.jpeg
-  val/
-    class1/
+    rust/
       img3.jpeg
-    class2/
+  val/
+    anthra/
       img4.jpeg
+    healthy/
+      img5.jpeg
+    rust/
+      img6.jpeg
+  test/
+    anthra/
+      img7.jpeg
+    healthy/
+      img8.jpeg
+    rust/
+      img9.jpeg
 ```
