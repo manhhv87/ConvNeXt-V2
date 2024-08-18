@@ -1,5 +1,7 @@
 # Training
 
+Solution to the error "cannot import name 'container_abcs' from 'torch._six'" (usually occurs after upgrading pytorch1.9)
+
 ```
 cd ~/pytorch/pytorch-1.13.1-cuda11.6-cudnn8-py3.10-ubuntu20.04/opt/conda/lib/python3.10/site-packages/timm/models/layers
 nano helpers.py
