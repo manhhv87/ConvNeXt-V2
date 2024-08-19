@@ -15,14 +15,6 @@ python3 split_dataset.py
 
 # Training
 
-Solution to the error "cannot import name 'container_abcs' from 'torch._six'" (usually occurs after upgrading pytorch1.9)
-
-```
-cd ~/pytorch/pytorch-1.13.1-cuda11.6-cudnn8-py3.10-ubuntu20.04/opt/conda/lib/python3.10/site-packages/timm/models/layers
-nano helpers.py
-```
-Change ```from torch._six import container_abcs`` to ``import collections.abc as container_abcs```
-
 We provide FCMAE pre-training and fine-tuning scripts here.
 Please check [INSTALL.md](INSTALL.md) for installation instructions first.
 
