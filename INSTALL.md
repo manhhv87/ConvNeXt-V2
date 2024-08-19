@@ -89,7 +89,7 @@ cd ~/pytorch/ConvNeXt-V2/dataset
 wget https://zenodo.org/api/records/8286126/files-archive
 ```
 
-Download the [Beans Imagery Dataset](https://zenodo.org/records/8286126) classification dataset and structure the data as follows:
+Structure the dataset as follows
 ```
 /path/to/dataset/
   train/
@@ -106,9 +106,8 @@ Download the [Beans Imagery Dataset](https://zenodo.org/records/8286126) classif
     rust/
 ```
 
-Unzip dataset and copy anthra, healthy, rust directories to train
+Unzip dataset and copy anthra, healthy, rust directories to train directory and run:
 
-Run file:
 ```
 python3 split_dataset.py
 ```
