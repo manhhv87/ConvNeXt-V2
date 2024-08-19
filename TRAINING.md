@@ -1,3 +1,18 @@
+## Dataset Preparation
+
+Create dataset directory
+```
+mkdir -p ~/pytorch/ConvNeXt-V2/dataset
+cd ~/pytorch/ConvNeXt-V2/dataset
+wget https://zenodo.org/api/records/8286126/files-archive
+```
+
+Unzip dataset and copy `anthra`, `healthy`, `rust` folders to `train` directory and run:
+
+```
+python3 split_dataset.py
+```
+
 # Training
 
 Solution to the error "cannot import name 'container_abcs' from 'torch._six'" (usually occurs after upgrading pytorch1.9)
