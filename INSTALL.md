@@ -106,7 +106,7 @@ Structure the dataset as follows
     rust/
 ```
 
-Unzip dataset and copy anthra, healthy, rust directories to train directory and run:
+Unzip dataset and copy anthra, healthy, rust folders to train directory and run:
 
 ```
 python3 split_dataset.py
