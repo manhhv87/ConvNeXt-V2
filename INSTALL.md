@@ -1,22 +1,20 @@
-# Installation
+# Dependency Setup
 
-## Dependency Setup
-
-### Create singularity image
+## Create singularity image
 ```
 module load singularity
 singularity cache clean
 singularity build --sandbox 1.13.1-cuda11.6-cudnn8-py3.10 docker://manhhv87/1.13.1-cuda11.6-cudnn8-devel-py3.10:latest
 ```
 
-### Clone this repo
+## Clone this repo
 ```
 mkdir -p ~/pytorch
 cd pytorch
 git clone https://github.com/manhhv87/ConvNeXt-V2.git --recursive
 ```
 
-### Install MinkowskiEngine
+## Install MinkowskiEngine
 
 ```
 cd MinkowskiEngine
@@ -50,7 +48,7 @@ Run bash file
 sbatch submit.sh
 ```
 
-### Install apex
+## Install apex
 ```
 cd apex
 ```
@@ -78,36 +76,4 @@ singularity exec --nv ../../1.13.1-cuda11.6-cudnn8-devel-py3.10 pip install --us
 Run bash file
 ```
 sbatch submit.sh
-```
-
-## Dataset Preparation
-
-Create dataset directory
-```
-mkdir -p ~/pytorch/ConvNeXt-V2/dataset
-cd ~/pytorch/ConvNeXt-V2/dataset
-wget https://zenodo.org/api/records/8286126/files-archive
-```
-
-Structure the dataset as follows
-```
-/path/to/dataset/
-  train/
-    anthra/
-    healthy/
-    rust/
-  val/
-    anthra/
-    healthy/
-    rust/
-  test/
-    anthra/
-    healthy/
-    rust/
-```
-
-Unzip dataset and copy anthra, healthy, rust folders to train directory and run:
-
-```
-python3 split_dataset.py
 ```
