@@ -13,6 +13,13 @@ Unzip dataset and copy `anthra`, `healthy`, `rust` folders to `train` directory 
 python3 split_dataset.py
 ```
 
+# Dependency Setup
+Please install [submitit](https://github.com/facebookincubator/submitit) to use multi-node training on a SLURM cluster
+```
+pip install submitit
+```
+We provide example commands for both multi-node and single-machine training below.
+
 # Training
 
 We provide FCMAE pre-training and fine-tuning scripts here.
@@ -41,14 +48,6 @@ singularity exec --nv ../pytorch-1.13.1-cuda11.6-cudnn8-py3.10 python3 -m torch.
 
 srun echo "Ending Process"
 ```
-
-## Multi-node Training
-We use multi-node training on a SLURM cluster with [submitit](https://github.com/facebookincubator/submitit) for reproducing the results in the paper. Please install:
-```
-pip install submitit
-```
-We provide example commands for both multi-node and single-machine training below.
-
 
 ## FCMAE Pre-Training 
 ConvNeXt V2-Base pre-training with 8 8-GPU nodes:
