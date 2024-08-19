@@ -7,7 +7,7 @@ cd ~/pytorch/ConvNeXt-V2/dataset
 wget https://zenodo.org/api/records/8286126/files-archive
 ```
 
-Unzip dataset and copy `anthra`, `healthy`, `rust` folders to `train` directory and run:
+Unzip dataset and copy `anthra`, `healthy`, `rust` folders to `train` directory and run
 
 ```
 python3 split_dataset.py
