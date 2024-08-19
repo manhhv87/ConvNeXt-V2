@@ -18,6 +18,29 @@ python3 split_dataset.py
 We provide FCMAE pre-training and fine-tuning scripts here.
 Please check [INSTALL.md](INSTALL.md) for installation instructions first.
 
+## Creat submit bash
+```
+#! /bin/bash
+
+#SBATCH --job-name=MJ            ## Name of the job
+#SBATCH --partition=gpu
+#SBATCH --ntasks=1               ## Number of tasks (analyses) to run
+#SBATCH --nodes=1
+#SBATCH --gres=gpu:1
+#SBATCH --time=72:00:00          ## Job Duration
+#SBATCH --tasks-per-node=1
+
+#SBATCH -o slurm.%N.%J.%u.out    ## STDOUT
+#SBATCH -e slurm.%N.%J.%u.err    ## STDERR
+
+module load singularity
+
+## --nv flag to allow the container use the GPU
+singularity exec --nv ../pytorch-1.13.1-cuda11.6-cudnn8-py3.10 python3 -m torch.distributed.run --nproc_per_node=1 main_pretrain.py --model convnextv2_base --batch_size 64 --update_freq 8 --blr 1.5e-4 --epochs 1600 --warmup_epochs 40 --data_path /dataset --output_dir /output
+
+srun echo "Ending Process"
+```
+
 ## Multi-node Training
 We use multi-node training on a SLURM cluster with [submitit](https://github.com/facebookincubator/submitit) for reproducing the results in the paper. Please install:
 ```
