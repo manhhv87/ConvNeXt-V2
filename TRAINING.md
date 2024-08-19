@@ -18,7 +18,7 @@ python3 split_dataset.py
 We provide FCMAE pre-training and fine-tuning scripts here.
 Please check [INSTALL.md](INSTALL.md) for installation instructions first.
 
-## Creat submit bash
+## Create submit bash
 ```
 #! /bin/bash
 
