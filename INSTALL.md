@@ -1,13 +1,11 @@
-# Dependency Setup
-
-## Create singularity image
+# Create singularity image
 ```
 module load singularity
 singularity cache clean
 singularity build --sandbox 1.13.1-cuda11.6-cudnn8-py3.10 docker://manhhv87/1.13.1-cuda11.6-cudnn8-devel-py3.10:latest
 ```
 
-## Clone this repo
+# Clone this repo
 ```
 mkdir -p ~/pytorch
 cd pytorch
