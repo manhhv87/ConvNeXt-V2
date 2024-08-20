@@ -4,7 +4,9 @@ Create dataset directory
 ```
 mkdir -p ~/pytorch/ConvNeXt-V2/dataset
 cd ~/pytorch/ConvNeXt-V2/dataset
-wget https://zenodo.org/api/records/8286126/files-archive
+wget https://zenodo.org/records/8286126/files/anthra.zip?download=1 -O anthra.zip
+wget https://zenodo.org/records/8286126/files/healthy.zip?download=1 -O healthy.zip
+wget https://zenodo.org/records/8286126/files/rust.zip?download=1 -O rust.zip
 ```
 
 Unzip dataset and copy `anthra`, `healthy`, `rust` folders to `train` directory and run
