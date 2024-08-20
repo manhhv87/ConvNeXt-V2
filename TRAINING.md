@@ -36,15 +36,14 @@ Please check [INSTALL.md](INSTALL.md) for installation instructions first.
 #SBATCH --gres=gpu:1
 #SBATCH --time=72:00:00          ## Job Duration
 #SBATCH --tasks-per-node=1
-#sbatch --chdir=output
+##SBATCH --chdir=$HOME/pytorch/ConvNeXt-V2
 
 #SBATCH -o slurm.%N.%J.%u.out    ## STDOUT
 #SBATCH -e slurm.%N.%J.%u.err    ## STDERR
 
 module load singularity
 
-## --nv flag to allow the container use the GPU
-singularity exec --nv ../pytorch-1.13.1-cuda11.6-cudnn8-py3.10 python3 -m torch.distributed.run --nproc_per_node=1 main_pretrain.py --model convnextv2_base --batch_size 64 --update_freq 8 --blr 1.5e-4 --epochs 1600 --warmup_epochs 40 --data_path /dataset --output_dir /output
+singularity exec --nv --bind $HOME/pytorch/ConvNeXt-V2/ pytorch-1.13.1-cuda11.6-cudnn8-py3.10 python -m torch.distributed.run --nproc_per_node=1 main_pretrain.py --model convnextv2_base --batch_size 64 --update_freq 8 --blr 1.5e-4 --epochs 1600 --warmup_epochs 40 --data_path $HOME/pytorch/ConvNeXt-V2/dataset --output_dir $HOME/pytorch/ConvNeXt-V2/output
 
 srun echo "Ending Process"
 ```
