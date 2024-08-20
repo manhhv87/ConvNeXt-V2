@@ -45,7 +45,7 @@ srun echo "Ending Process"
 
 Run bash file
 ```
-sbatch submit.sh
+sbatch submit_me.sh
 ```
 
 ## Install apex
@@ -53,7 +53,7 @@ sbatch submit.sh
 cd apex
 ```
 
-Create `submit.sh` with content:
+Create `submit_apex.sh` with content:
 ```
 #! /bin/bash
 
@@ -70,10 +70,13 @@ Create `submit.sh` with content:
 
 module load singularity
 
+## --nv flag to allow the container use the GPU
 singularity exec --nv ../../pytorch-1.13.1-cuda11.6-cudnn8-py3.10 pip install --user -v --disable-pip-version-check --no-cache-dir --no-build-isolation --global-option="--cpp_ext" --global-option="--cuda_ext" ./
+
+srun echo "Ending Process"
 ```
 
 Run bash file
 ```
-sbatch submit.sh
+sbatch submit_apex.sh
 ```
