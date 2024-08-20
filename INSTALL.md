@@ -12,7 +12,7 @@ cd pytorch
 git clone https://github.com/manhhv87/ConvNeXt-V2.git --recursive
 ```
 
-## Install MinkowskiEngine
+# Install MinkowskiEngine
 
 ```
 cd MinkowskiEngine
@@ -48,7 +48,7 @@ Run bash file
 sbatch submit_me.sh
 ```
 
-## Install apex
+# Install apex
 ```
 cd apex
 ```
