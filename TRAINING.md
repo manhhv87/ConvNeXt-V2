@@ -43,6 +43,8 @@ Please check [INSTALL.md](INSTALL.md) for installation instructions first.
 #SBATCH -o slurm.%N.%J.%u.out    ## STDOUT
 #SBATCH -e slurm.%N.%J.%u.err    ## STDERR
 
+export OMP_NUM_THREADS=12
+
 module load singularity
 
 singularity exec --nv --bind $HOME/pytorch/ConvNeXt-V2/ pytorch-1.13.1-cuda11.6-cudnn8-py3.10 python -m torch.distributed.run --nproc_per_node=1 main_pretrain.py --model convnextv2_base --batch_size 64 --update_freq 8 --blr 1.5e-4 --epochs 1600 --warmup_epochs 40 --data_path $HOME/pytorch/ConvNeXt-V2/dataset --output_dir $HOME/pytorch/ConvNeXt-V2/output
@@ -229,52 +231,3 @@ python -m torch.distributed.launch --nproc_per_node=8 main_finetune.py \
 --output_dir /path/to/save_results
 ```
 </details>
-
-## Implementing FCMAE with Masked Convolution in JAX
-
-In our paper, we trained our main results using the JAX framework on TPU VM Pods. However, we do not have an efficient sparse convolution kernel implementation in this environment. Therefore, we have included our JAX model definition that uses a masked (dense) convolution for FCMAE pre-training.
-
-```python
-
-from flax import linen as nn
-import jax.numpy as jnp
-
-class GRN(nn.Module):
-  dim: int
-  eps: float = 1e-6
-  
-  def init_fn(self, key, shape, fill_value):
-    return jnp.full(shape, fill_value)
-  
-  @nn.compact
-  def __call__(self, inputs, mask=None):
-    gamma = self.param("gamma", self.init_fn, (self.dim,), 0.)
-    beta = self.param("beta", self.init_fn, (self.dim,), 0.)
-    
-    x = inputs
-    if mask is not None:
-      x = x * (1. - mask)
-    GX = jnp.power((jnp.sum(jnp.power(x, 2), axis=(1,2), keepdims=True) + self.eps), 0.5)
-    Nx = Gx / (jnp.mean(Gx, axis=-1, keepdims=True) + self.eps)
-    return gamma * (Nx * inputs) + beta + inputs
-  
-class Block(nn.Module):
-  dim: int
-  drop_path: float
-  
-  @nn.compact
-  def __call__(self, inputs, mask=None):
-    if mask is not None:
-      x = inputs * (1. - mask)
-    x = DepthwiseConv2D((7, 7), name='dwconv')(x)
-    if mask is not None: # The binary masking is numerically identical to sparse conv.
-      x = x * (1.- mask)
-    x = nn.LayerNorm(name='norm')(x)
-    x = nn.Dense(4 * self.dim, name='pwconv1')(x)
-    x = nn.gelu(x)
-    x = GRN(4 * self.dim, name='grn')(x, mask)
-    x = nn.Dense(self.dim, name='pwconv2')(x)
-    x = nn.Dropout(rate=self.drop_path, broadcast_dims=(1,2,3), name='droppath')(x, deterministic=not self.training)
-    return x + inputs
-```
-
