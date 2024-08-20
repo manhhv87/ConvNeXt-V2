@@ -10,8 +10,6 @@ singularity build --sandbox pytorch-1.13.1-cuda11.6-cudnn8-py3.10 docker://manhh
 mkdir -p ~/pytorch
 cd pytorch
 git clone https://github.com/manhhv87/ConvNeXt-V2.git --recursive
-rm -rf MinkowskiEngine
-git clone https://github.com/leadbreak/MinkowskiEngine.git --recursive
 ```
 
 ## Install MinkowskiEngine
@@ -20,7 +18,7 @@ git clone https://github.com/leadbreak/MinkowskiEngine.git --recursive
 cd MinkowskiEngine
 ```
 
-Create `submit.sh` with content:
+Create `submit_me.sh` with content:
 ```
 #! /bin/bash
 
@@ -40,7 +38,9 @@ export CUDA_HOME=/usr/local/cuda
 
 module load singularity
 
-singularity exec --nv ../../pytorch-1.13.1-cuda11.6-cudnn8-py3.10 python3 setup.py install --user --blas_include_dirs=${CONDA_PREFIX}/include --blas=openblas
+singularity exec --nv ../pytorch-1.13.1-cuda11.6-cudnn8-py3.10 python3 setup.py install --user --blas_include_dirs=${CONDA_PREFIX}/include --blas=openblas
+
+srun echo "Ending Process"
 ```
 
 Run bash file
