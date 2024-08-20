@@ -38,7 +38,6 @@ Please check [INSTALL.md](INSTALL.md) for installation instructions first.
 #SBATCH --gres=gpu:1
 #SBATCH --time=72:00:00          ## Job Duration
 #SBATCH --tasks-per-node=1
-##SBATCH --chdir=$HOME/pytorch/ConvNeXt-V2
 
 #SBATCH -o slurm.%N.%J.%u.out    ## STDOUT
 #SBATCH -e slurm.%N.%J.%u.err    ## STDERR
