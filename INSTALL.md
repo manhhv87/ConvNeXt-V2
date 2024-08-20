@@ -10,6 +10,8 @@ singularity build --sandbox pytorch-1.13.1-cuda11.6-cudnn8-py3.10 docker://manhh
 mkdir -p ~/pytorch
 cd pytorch
 git clone https://github.com/manhhv87/ConvNeXt-V2.git --recursive
+rm -rf MinkowskiEngine
+git clone https://github.com/leadbreak/MinkowskiEngine.git --recursive
 ```
 
 ## Install MinkowskiEngine
