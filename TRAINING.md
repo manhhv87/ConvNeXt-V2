@@ -46,7 +46,7 @@ export OMP_NUM_THREADS=12
 
 module load singularity
 
-singularity exec --nv --bind $HOME/pytorch/ConvNeXt-V2/ pytorch-1.13.1-cuda11.6-cudnn8-py3.10 python -m torch.distributed.run --nproc_per_node=1 main_pretrain.py --model convnextv2_base --batch_size 64 --update_freq 8 --blr 1.5e-4 --epochs 1600 --warmup_epochs 40 --data_path $HOME/pytorch/ConvNeXt-V2/dataset --output_dir $HOME/pytorch/ConvNeXt-V2/output
+singularity exec --nv --bind $HOME/pytorch/ConvNeXt-V2/ pytorch-1.13.1-cuda11.6-cudnn8-py3.10 python -m torch.distributed.run --nproc_per_node=1 main_pretrain.py --model convnextv2_base --batch_size 32 --update_freq 8 --blr 1.5e-4 --epochs 300 --warmup_epochs 30 --data_path $HOME/pytorch/ConvNeXt-V2/dataset --output_dir $HOME/pytorch/ConvNeXt-V2/output_train
 
 srun echo "Ending Process"
 ```
